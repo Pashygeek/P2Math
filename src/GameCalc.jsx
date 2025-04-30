@@ -7,6 +7,9 @@ function GameCalc() {
   const [answer, setAnswer] = useState('');
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState('');
+  const [timer, setTimer] = useState(30);
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [zoomInOut, setZoomInOut] = useState(false);
 
   const operators = ['+', '-', '*', '/'];
 
@@ -21,6 +24,29 @@ function GameCalc() {
   useEffect(() => {
     generateQuestion();
   }, []);
+
+  useEffect(() => {
+    if (timerRunning && timer > 0) {
+      const interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+      return () => clearInterval(interval);
+    } else if (timer === 0) {
+      handleTimeout();
+    }
+  }, [timer, timerRunning]);
+
+  const handleTimeout = () => {
+    if (answer === '') {
+      setScore((prevScore) => Math.max(prevScore - 1, 0));
+      setFeedback('❌ Time’s Up! You lost 1 point.');
+    }
+    setTimeout(() => {
+      generateQuestion();
+      setTimer(30);
+      setTimerRunning(true);
+    }, 1000);
+  };
 
   const checkAnswer = () => {
     let correct;
@@ -50,20 +76,49 @@ function GameCalc() {
 
     setTimeout(() => {
       generateQuestion();
+      setTimer(30);
+      setTimerRunning(true);
     }, 1000);
   };
 
+  const handleStart = () => {
+    setTimerRunning(true);
+  };
+
+  useEffect(() => {
+    if (timer <= 10) {
+      setZoomInOut(true);
+    } else {
+      setZoomInOut(false);
+    }
+  }, [timer]);
+
   return (
     <div className="game-container">
-      <h2>🎮 Math Game</h2>
-      <p>Solve: {num1} {operator} {num2}</p>
+      <h2>🧠 Math Game</h2>
+      <p>{score > 0 ? 'Solve the question below and increase your score!' : `Ready for a challenge? Click on the start button and solve the questions that follow to boost your score:`}</p>
+
+      {timerRunning && (
+        <div className="question">
+          <p>{`${num1} ${operator} ${num2}`}</p>
+        </div>
+      )}
+
+      <div className={`timer ${timer <= 10 ? 'red-timer' : ''}`}>
+        Time Left: {timer}s
+      </div>
+
       <input
         type="number"
         value={answer}
         onChange={(e) => setAnswer(e.target.value)}
         placeholder="Your answer"
+        className={zoomInOut ? 'zoom-in-out' : ''}
       />
+    <div className='game-calc-btns'>
+    {!timerRunning && <button onClick={handleStart}>Start</button>}
       <button onClick={checkAnswer}>Submit</button>
+    </div>
       <p>{feedback}</p>
       <p>Score: {score}</p>
     </div>

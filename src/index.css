@@ -166,6 +166,37 @@ body {
   color: #fff;
 }
 
+.game-calc-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.timer {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.red-timer {
+  color: red;
+  font-weight: bold;
+}
+
+.zoom-in-out {
+  animation: zoom 1s infinite;
+}
+
+@keyframes zoom {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 
 @media (max-width: 480px) {
   .calculator {
