@@ -1,13 +1,189 @@
-body {
+* {
+  box-sizing: border-box;
+}
+html, body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  min-height: 100vh;
+  background: linear-gradient(145deg, #2c3e50, #34495e);
+  font-family: 'Courier New', Courier, monospace;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calculator {
+  background: #1a1a1a;
+  border-radius: 28px;
+  box-shadow: 12px 12px 24px #111111, -8px -8px 16px #2a2a2a;
+  padding: 20px;
+  width: 340px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.display {
+  background: #000;
+  color: #00ff99;
+  font-size: 2.2rem;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: right;
+  margin-bottom: 24px;
+  box-shadow: inset 3px 3px 8px #111, inset -3px -3px 8px #1f1f1f;
+  font-weight: bold;
+  height: 60px;
+  overflow-x: auto;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+}
+
+.btn {
+  font-size: 1.2rem;
+  padding: 16px;
+  background: linear-gradient(to bottom, #3a3a3a, #222);
+  color: #f1f1f1;
+  border-radius: 10px;
+  border: 1px solid #111;
+  box-shadow:
+    0 4px #1a1a1a,
+    inset 0 -4px 8px #00000088,
+    inset 0 4px 8px #4f4f4f22;
+  text-transform: uppercase;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn:active {
+  transform: translateY(4px);
+  box-shadow: inset 0 2px 6px #000000aa;
+}
+
+.equals {
+  background: linear-gradient(to bottom, #00b894, #00997a);
+  color: white;
+  font-weight: bold;
+}
+
+.btn:nth-child(-n+12) {
+  font-size: 1rem;
+  background: linear-gradient(to bottom, #444, #222);
+  color: #ffd700;
+}
+
+.tab-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+
+.tab-buttons button {
+  margin: 0 10px;
+  padding: 10px 20px;
+  background: #222;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 3px 3px 8px #111;
+}
+
+.tab-buttons button.active {
+  background: #00b894;
+  color: #fff;
+}
+
+.game-container {
+  background: #1a1a1a;
+  color: #00ff99;
+  padding: 24px;
+  border-radius: 28px;
+  box-shadow: 12px 12px 24px #111111, -8px -8px 16px #2a2a2a;
+  text-align: center;
+  max-width: 340px;
+  width: 90vw;
+  margin: auto;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.game-container h2 {
+  color: #ffd700;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.game-container input {
+  font-size: 1.5rem;
+  padding: 12px 16px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  width: 100%;
+  text-align: center;
+  background: #000;
+  color: #00ff99;
+  box-shadow: inset 2px 2px 6px #111, inset -2px -2px 6px #1f1f1f;
+}
+
+.game-container button {
+  padding: 12px 20px;
+  background: linear-gradient(to bottom, #00b894, #00997a);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow:
+    0 4px #006655,
+    inset 0 -4px 8px #007f6e,
+    inset 0 4px 8px #1ad1a3;
+  transition: 0.2s;
+}
+
+.game-container button:active {
+  transform: translateY(4px);
+  box-shadow: inset 0 2px 6px #000000aa;
+}
+
+.game-container p {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+
+@media (max-width: 480px) {
+  .calculator {
+    width: 90vw;
+    padding: 15px;
+  }
+
+  .display {
+    font-size: 1.8rem;
+    padding: 15px;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 12px;
+  }
+
+  .buttons {
+    gap: 10px;
+  }
 }

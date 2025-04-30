@@ -1,23 +1,43 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Calculator from './Calculator';
+import GameCalc from './GameCalc';
+import Predictor from './Predictor';
 import './App.css';
 
 function App() {
+  const [activeTab, setActiveTab] = useState('calculator');
+  const currentYear = new Date().getFullYear();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div className="app">
+      <div className="tab-buttons">
+        <button
+          className={activeTab === 'calculator' ? 'active' : ''}
+          onClick={() => setActiveTab('calculator')}
         >
-          Learn React
-        </a>
-      </header>
+          Calculator
+        </button>
+        <button
+          className={activeTab === 'gamecalc' ? 'active' : ''}
+          onClick={() => setActiveTab('gamecalc')}
+        >
+          Game Calc
+        </button>
+        <button
+          className={activeTab === 'predictor' ? 'active' : ''}
+          onClick={() => setActiveTab('predictor')}
+        >
+          Predictor
+        </button>
+      </div>
+
+      {activeTab === 'calculator' && <Calculator />}
+      {activeTab === 'gamecalc' && <GameCalc />}
+      {activeTab === 'predictor' && <Predictor />}
+
+      <footer style={{ marginTop: '40px', textAlign: 'center', opacity: 0.8, fontSize: '0.85rem' }}>
+        &copy; {currentYear} Patience Wanjiru. All rights reserved.
+      </footer>
     </div>
   );
 }

@@ -1,0 +1,314 @@
+.game-container2 {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 20px;
+    border-radius: 28px;
+    box-shadow: 12px 12px 24px #111111, -8px -8px 16px #2a2a2a;
+    text-align: center;
+    max-width: 500px;
+    width: 90vw;
+    margin: auto;
+    font-family: 'Courier New', Courier, monospace;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0px;
+  }
+
+  .prediction-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .prediction-btn {
+    font-size: 2rem;
+    padding: 12px 16px;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 4px 4px 8px #111;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .prediction-btn.active {
+    background: #00b894;
+    color: #fff;
+    box-shadow: 0 0 10px 4px rgba(0, 185, 148, 0.7);
+  }
+
+  .prediction-btn:hover {
+    transform: scale(1.1);
+  }
+
+  .slots {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .slot {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    background: #333;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px #000;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .slots.spinning .slot {
+    transform: rotate(360deg);
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .spin-btn {
+    padding: 20px;
+    background: linear-gradient(to bottom, #00b894, #00997a);
+    color: white;
+    border-radius: 50%;
+    border: none;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 4px #006655, inset 0 -4px 8px #007f6e;
+    transition: 0.2s;
+    position: relative;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+  }
+
+  .spin-btn:active {
+    transform: translateY(6px);
+    box-shadow:
+      inset 2px 2px 6px rgba(0, 0, 0, 0.3),
+      2px 2px 4px rgba(255, 255, 255, 0.4);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  }
+
+  .spin-btn:hover {
+    box-shadow:
+      6px 6px 15px rgba(0, 0, 0, 0.25),
+      -6px -6px 15px rgba(255, 255, 255, 0.35);
+    transform: translateY(-2px);
+  }
+
+
+  .win-overlay {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 3rem;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow:
+      1px 1px 2px black,
+      0 0 15px #fff,
+      0 0 30px #ff7c00,
+      0 0 40px #ff7c00;
+    animation: zoomFade 2s ease-in-out forwards;
+    z-index: 1000;
+    pointer-events: none;
+  }
+
+  @keyframes zoomFade {
+    0% {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: translateX(-50%) scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-50%) scale(0.8);
+      opacity: 0;
+    }
+  }
+
+  .prediction-set {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .slots-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    margin: 30px 0;
+    padding: 10px;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #00b894, #c0c0c0);
+    box-shadow:
+      inset -10px -10px 20px rgba(255, 255, 255, 0.7),
+      inset 10px 10px 20px rgba(0, 0, 0, 0.1),
+      0 10px 25px rgba(0, 0, 0, 0.3),
+      0 -5px 10px rgba(255, 255, 255, 0.3);
+    border: 4px solid #00997a;
+    position: relative;
+  }
+
+  .slot-cylinder {
+    width: 100px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+    margin: 0 10px;
+  }
+
+  .slot-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .slot-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .scrolling {
+    animation: scrollUp 1s ease-in-out forwards;
+  }
+
+  @keyframes scrollUp {
+    0% {
+      transform: translateY(0%);
+    }
+    100% {
+      transform: translateY(-100%);
+    }
+  }
+
+  .slot-static {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  .slots-container.spinning .slot-inner {
+    animation: roll 2s ease-in-out forwards;
+  }
+
+  .slot-item {
+    height: 120px;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-shadow: 1px 1px 4px black;
+  }
+
+  @keyframes roll {
+    0% {
+      transform: translateY(0);
+    }
+    100% {
+      transform: translateY(-720px);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .game-container2 {
+      width: 95vw;
+      padding: 15px;
+      max-width: 100%;
+      gap: 10px;
+    }
+
+    .prediction-btn {
+      font-size: 1.5rem;
+      padding: 10px 14px;
+    }
+
+    .prediction-buttons {
+      gap: 10px;
+    }
+
+    .slot {
+      font-size: 2rem;
+      width: 80px;
+      height: 80px;
+    }
+
+
+    .win-overlay {
+      font-size: 2.5rem;
+      top: 15%;
+    }
+
+    .slots-container {
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .slot-cylinder {
+      width: 80px;
+      height: 100px;
+    }
+
+    .slot-item {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .game-container2 {
+      width: 90vw;
+      padding: 10px;
+      max-width: 100%;
+    }
+
+    .prediction-btn {
+      font-size: 1.3rem;
+      padding: 8px 15px;
+    }
+
+    .slot {
+      font-size: 1.8rem;
+      width: 70px;
+      height: 70px;
+    }
+
+    .win-overlay {
+      font-size: 2rem;
+      top: 20%;
+    }
+
+    .slot-cylinder {
+      width: 70px;
+      height: 90px;
+    }
+
+    .slot-item {
+      font-size: 2rem;
+    }
+  }
+
+@media (width: 320px) {
+    .slots-container {
+        width: 290px;
+    }
+}
