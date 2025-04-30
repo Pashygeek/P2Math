@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './predictor.css';
 
 const Predictor = () => {
-  const values = ['1', '2', '3', '4']; // Replaced cartoon images with numbers
+  const values = ['1', '2', '3', '4'];
   const colors = ['#ff595e', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93'];
 
   const [prediction, setPrediction] = useState(['', '', '']);
@@ -16,6 +16,7 @@ const Predictor = () => {
   const [showWinText, setShowWinText] = useState(false);
   const [scrollingSlots, setScrollingSlots] = useState([]);
   const [animationKey, setAnimationKey] = useState(0);
+  const [winScore, setWinScore] = useState(0); 
 
   const getRandomSlot = () => ({
     value: values[Math.floor(Math.random() * values.length)],
@@ -53,6 +54,7 @@ const Predictor = () => {
 
       if (isWin) {
         setShowWinText(true);
+        setWinScore((prev) => prev + 1); // Increment the win score
         setTimeout(() => setShowWinText(false), 2000);
       }
     }, 1500);
@@ -63,6 +65,9 @@ const Predictor = () => {
       {showWinText && <div className="win-overlay">🎉 You Won! 🎉</div>}
       <div className="game-container2">
         <h2>PREDICTOR - A little fun game!</h2>
+
+        {/* Display Win Score Below Title */}
+        <p>Win Score: {winScore}</p>
 
         <p>Choose your prediction (3 numbers):</p>
         <div className="prediction-set">
